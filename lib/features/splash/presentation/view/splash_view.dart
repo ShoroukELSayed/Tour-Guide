@@ -1,3 +1,4 @@
+import 'package:citytales/features/splash/presentation/widgets/splash_body.dart';
 import 'package:flutter/material.dart';
 
 class SplashView extends StatelessWidget {
@@ -5,6 +6,6 @@ class SplashView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(backgroundColor: Colors.white, body: SplashBody());
   }
 }

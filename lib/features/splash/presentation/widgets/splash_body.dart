@@ -1,7 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:citytales/core/constants/app_images.dart';
 import 'package:citytales/core/utils/app_functions.dart';
-import 'package:citytales/features/home/presentation/view/home_view.dart';
+import 'package:citytales/features/home/views/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,7 +19,10 @@ class SplashBody extends StatelessWidget {
         ),
         child: ZoomIn(
           duration: 3.seconds,
-          onFinish: (direction) => Get.to(() => HomeView()),
+          onFinish: (direction) => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (_) => const HomeView()),
+          ),
           child: Center(child: Image.asset(AppImages.imagesLogo)),
         ),
       ),

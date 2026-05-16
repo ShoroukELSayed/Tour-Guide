@@ -1,25 +1,29 @@
-import 'package:citytales/features/splash/presentation/view/splash_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+import 'package:flutter/services.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
-  runApp(const CityTales());
-}
+import 'app.dart';
+import 'data/models/place_model.dart';
 
-class CityTales extends StatelessWidget {
-  const CityTales({super.key});
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-  @override
-  Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: Size(375, 812),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (_, child) {
-        return GetMaterialApp(debugShowCheckedModeBanner: false, home: child);
-      },
-      child: SplashView(),
-    );
-  }
+  // Hive
+  await Hive.initFlutter();
+  Hive.registerAdapter(PlaceModelAdapter());
+
+  // Orientation
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
+
+  // Status bar
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+    ),
+  );
+
+  runApp(const CityTalesApp());
 }
